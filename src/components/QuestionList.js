@@ -19,9 +19,11 @@ function QuestionList() {
     return <QuestionItem 
       key={data.id} 
       question={data} 
-      onUpdateQuestion={handleUpdateQuestion} />
+      onUpdateQuestion={handleUpdateQuestion} 
+      onDeleteQuestion={handleDeleteQuestion} />
   }); //requires key
   
+
   function handleUpdateQuestion(updateQuestion){
     const updateQuestions = questions.map((question)=> {
       if(questions.id === updateQuestion.id){
@@ -51,9 +53,7 @@ function QuestionList() {
       <ul>
         {/* display QuestionItem components here after fetching */}
         {ask}
-        <QuestionForm 
-        onAddQuestions={handleAddQuestions} 
-        onDeleteQuestion={handleDeleteQuestion} />
+        
       </ul>
     </section>
   );

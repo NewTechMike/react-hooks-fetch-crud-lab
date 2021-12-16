@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm({onAddQuestions}) {
+function QuestionForm(props) {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -25,19 +25,26 @@ function QuestionForm({onAddQuestions}) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         "prompt": formData.prompt,
-        "answers": [formData.answer1, formData.answer2, formData.answer3, formData.answer,4],
+        "answers": [formData.answer1, formData.answer2, formData.answer3, formData.answer4],
         "correctIndex": formData.correctIndex
-      }
+      })
     })
-    .then((resp)=>resp.json())
-    .then((data)=>onAddQuestions(data));
+    
+    setFormData({
+      prompt: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+      correctIndex: 0,
+    })
   }//POST /questions
 
   return (
     <section>
-      <h1>New Question</h1>
+      <h1>AddNew Question</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Prompt:
